@@ -1,3 +1,13 @@
+
+/*
+Kedves Balázs!
+Beszéltük a Teamsen, hogy szebb lenne átírni osztályokra, és nem csak így függvényekkel csinálni.
+Végül viszont sajnos nem csináltam meg, mert időszűkében vagyok. Legközelebb szebben fogom megírni, elnézést!
+*/
+
+
+
+
 #include <iostream>
 #include <math.h>
 #include <fstream>
