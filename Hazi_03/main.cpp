@@ -38,7 +38,6 @@ double richardson(double x,  double h){
     fx1=f(x+h);
     fx2=f(x-h);
     d2=D(fx1,fx2,h);
-
     s2=S(d1,d2);
 
     return (16*s1-s2)/15;
