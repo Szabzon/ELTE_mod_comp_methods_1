@@ -1,6 +1,8 @@
 #include <iostream>
 #include <math.h>
+#include <fstream>
 
+using namespace std;
 
 double f(double x,double F=900, double q=1.8, double a=200, double he=35){
     return F/q*(cosh(q/F*x)-cosh(q*a/(2*F)))+he;
@@ -38,6 +40,7 @@ double richardson(double x,  double h){
     fx1=f(x+h);
     fx2=f(x-h);
     d2=D(fx1,fx2,h);
+
     s2=S(d1,d2);
 
     return (16*s1-s2)/15;
@@ -84,19 +87,39 @@ double simpson(double a, double b, double n){
 }
 
 
+void kiirat(){
+    ofstream ofile;
+    ofile.open ("output.txt");
+    ofile.precision(16);
+    double a=-100;
+    double b=100;
+    double n;
+    double kp;
+    double tp;
+    double sp;
+    for(int i=2;i<7;i++){
+        n=pow(10,i);
+        kp=kozeppontos(a,b,n);
+        tp=trapez(a,b,n);
+        sp=simpson(a,b,n);
+
+        ofile<<"A lepesek szama: n="<<n<<"\n";
+        ofile<<"A kozeppeontos modszerrel kapott megoldas: "<<kp<<"\n";
+        ofile<<"A trapez modszerrel kapott megoldas:       "<<tp<<"\n";
+        ofile<<"A Simpson modszerrel kapott megoldas:      "<<sp<<"\n\n";
+
+        cout<<"A lepesek szama: n="<<n<<"\n";
+        cout<<"A kozeppeontos modszerrel kapott megoldas: "<<kp<<"\n";
+        cout<<"A trapez modszerrel kapott megoldas:       "<<tp<<"\n";
+        cout<<"A Simpson modszerrel kapott megoldas:      "<<sp<<"\n\n";
+    }
+    ofile.close();
+}
+
+
 
 
 int main(int, char**) {
     std::cout.precision(16);
-    double a=-100;
-    double b=100;
-    double n;
-    for(int i=2;i<6;i++){
-        n=pow(10,i);
-        std::cout<<"n="<<n<<"\n";
-        std::cout<<kozeppontos(a,b,n)<<"\n";
-        std::cout<<trapez(a,b,n)<<"\n";
-        std::cout<<simpson(a,b,n)<<"\n\n";
-
-    }
+    kiirat();
 }

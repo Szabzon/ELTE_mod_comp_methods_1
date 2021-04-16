@@ -1,0 +1,25 @@
+A lepesek szama: n=100
+A kozeppeontos modszerrel kapott megoldas: 201.3374790062491
+A trapez modszerrel kapott megoldas:       201.3370844957285
+A Simpson modszerrel kapott megoldas:      201.3373475027422
+
+A lepesek szama: n=1000
+A kozeppeontos modszerrel kapott megoldas: 201.3360173057345
+A trapez modszerrel kapott megoldas:       201.3360132871748
+A Simpson modszerrel kapott megoldas:      201.3360159662146
+
+A lepesek szama: n=10000
+A kozeppeontos modszerrel kapott megoldas: 201.3360026887398
+A trapez modszerrel kapott megoldas:       201.3360026484806
+A Simpson modszerrel kapott megoldas:      201.3360026753201
+
+A lepesek szama: n=100000
+A kozeppeontos modszerrel kapott megoldas: 201.336002542564
+A trapez modszerrel kapott megoldas:       201.3360025421591
+A Simpson modszerrel kapott megoldas:      201.336002542429
+
+A lepesek szama: n=1000000
+A kozeppeontos modszerrel kapott megoldas: 201.3360025412223
+A trapez modszerrel kapott megoldas:       201.3360025412094
+A Simpson modszerrel kapott megoldas:      201.336002541218
+
