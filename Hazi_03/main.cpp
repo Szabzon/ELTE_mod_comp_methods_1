@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-//#include "vector2.h"
+
 
 double f(double x,double F=900, double q=1.8, double a=200, double he=35){
     return F/q*(cosh(q/F*x)-cosh(q*a/(2*F)))+he;
