@@ -50,9 +50,8 @@ struct Temperature
         return *this;
     }
     
-    // this is the function which converts the temperature to
+    // this is the function which converts the temperature to the given unit
     //template<typename W>
-
     Temperature<V,U>& convert_from_C(string w){    // w is the unit to convert to
         if (w=="C"){
             v+=0;
@@ -92,13 +91,22 @@ struct Temperature
         return *this;
     }
 
-
+    //---------Operators---------
+    
+    // addition assignment
+    Temperature<V,U>& operator+=(Temperature<V,U> const& a){
+        Temperature<V,U> b=a;
+        b=convert1(b,u);
+        v+=b.v;
+        return *this;
+    }
 };
-
 
 // this is the function which converts the temperature to C
 template<typename V, typename U>
-V convert_to_C1(V v, U u){
+Temperature<V,U> convert_to_C1(Temperature<V,U> const& a){
+    V v=a.v;
+    U u=a.u;
     if (u=="C"){
         v+=0;
         u="C";
@@ -123,15 +131,17 @@ V convert_to_C1(V v, U u){
         v=(v-7.5)/0.525;
         u="C";
     }
-    return v;
+    else{
+        cout<<"\nHIBA!\n";
+    }
+    return Temperature<V,U>{v,u};
 }
 
-// this is the function which converts the temperature to
-//template<typename W>
-
-
+// this is the function which converts the temperature to the given unit
 template<typename V, typename U>
-V convert_from_C1(V v, U u, string w){  // w is the unit to convert to
+Temperature<V,U> convert_from_C1(Temperature<V,U> const& a, string w){
+    V v=a.v;
+    U u=a.u;
     if (w=="C"){
         v+=0;
         u="C";
@@ -153,89 +163,17 @@ V convert_from_C1(V v, U u, string w){  // w is the unit to convert to
         u="De";
     }
     else if (w=="Ro"){
-        v=(v-7.5)/0.525;
         v=v*0.525+7.5;
         u="Ro";
     }
-    return v;
+    return Temperature<V,U>{v,u};
 }
 
-
-
-
-
-
-/*
-
+// this function brings together the conversions
 template<typename V, typename U>
-    V atvalt1(Temperature<V,U> const& a){
-        if (a.u=="C"){
-            a.v+=0;
-        }
-        else if (a.u=="K"){
-            a.v-=273.15;
-        }
-        else if (a.u=="F"){
-            a.v=(v-32)/1.8;
-        }
-        else if (a.u=="R"){
-            a.v=(v-491.67)/1.8;
-        }
-        else if (u=="De"){
-            a.v=(a.v+100)/1.5;
-        }
-        else if (a.u=="Ro"){
-            a.v=(v-7.5)/0.525;
-        }
-        return a.v;
-    }
-*/
-
-/*
-template<typename V, typename U>
-V atvalt1(Temperature<V,U> const& a){
-    if (a.u=="C"){
-        a.v+=0;
-        a.u="C";
-    }
-    else if (u=="K"){
-        v-=273.15;
-        u="C";
-    }
-    else if (u=="F"){
-        v=(v-32)/1.8;
-        u="C";
-    }
-    else if (u=="R"){
-        v=(v-491.67)/1.8;
-        u="C";
-    }
-    else if (u=="De"){
-        v=(v+100)/1.5;
-        u="C";
-    }
-    else if (u=="Ro"){
-        v=(v-7.5)/0.525;
-        u="C";
-    }
-
-    return *this;
-    }
-    */
-
-   /*
-   string val=to_string(v);
-    int i=0;
-    for (i=0;i<val.length()){
-        if (isdigit(val[i])==false){
-            break;
-             cout<<"The value of the temperature is not a number. Please correct it!";
-        }
-    }
-    while (i<val.length() && isdigit(val[i])==true){
-        i++;
-    }
-    if (i<val.length()){
-        cout<<"The value of the temperature is not a number. Please correct it!";
-    }
-    */
+Temperature<V,U> convert1(Temperature<V,U> const& a, string w){    // w is the unit to convert to
+    Temperature<V,U> b=a;
+    b=convert_to_C1(b);
+    b=convert_from_C1(b,w);
+    return b;
+}
