@@ -100,6 +100,15 @@ struct Temperature
         v+=b.v;
         return *this;
     }
+
+    // subtraction assignment
+    Temperature<V,U>& operator-=(Temperature<V,U> const& a){
+        Temperature<V,U> b=a;
+        b=convert1(b,u);
+        v-=b.v;
+        return *this;
+    }
+
 };
 
 // this is the function which converts the temperature to C
@@ -176,4 +185,24 @@ Temperature<V,U> convert1(Temperature<V,U> const& a, string w){    // w is the u
     b=convert_to_C1(b);
     b=convert_from_C1(b,w);
     return b;
+}
+
+// Operators
+
+// addition
+template<typename V, typename U>
+Temperature<V,U> operator+(Temperature<V,U> const& a, Temperature<V,U> const& b){
+    Temperature<V,U> c=b;
+        c=convert1(c,a.u);
+        c.v+=a.v;
+        return c;
+}
+
+// subtraction
+template<typename V, typename U>
+Temperature<V,U> operator-(Temperature<V,U> const& a, Temperature<V,U> const& b){
+    Temperature<V,U> c=b;
+        c=convert1(c,a.u);
+        c.v=a.v-c.v;
+        return c;
 }
