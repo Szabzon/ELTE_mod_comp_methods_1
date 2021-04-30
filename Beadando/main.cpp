@@ -15,8 +15,8 @@ int main(int, char**) {
 
     //t1.convert("Ro");
     cout<<"maga a t1 hom: "<<t1.v<<" "<<t1.u<<"\n";
-    t1+=t2;
-    cout<<"t1+t2: "<<t1.v<<" "<<t1.u<<"\n";
+    Temperature <double,string> t3=t1-t2;
+    cout<<"t1+t2: "<<t3.v<<" "<<t3.u<<"\n";
     cout<<"maga a t1 hom: "<<t2.v<<" "<<t2.u<<"\n";
 
 
