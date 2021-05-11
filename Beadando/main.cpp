@@ -1,6 +1,6 @@
 #include <iostream>
 #include "temperature.h"
-
+#include <algorithm>
 
 using namespace std;
 
@@ -29,10 +29,18 @@ int main(int, char**) {
 
 
     vector <Temperature<double>> temps{{0,"C"},{0,"K"},{0,"F"}};
-    vector <Temperature<double>> temps2=sort(temps,false); // rendezés
+    vector <Temperature<double>> temps2=sort1(temps,false); // sort the vector by my own method
 
-    int n=temps.size(); // a vektor kiíratása
+    cout<<"\nthe sorted temps vector with my method: ";
+    int n=temps.size(); 
     for (int i=0;i<n;i++){
-        cout<<temps2[i].v<<" "<<temps2[i].u<<" ";
+        cout<<temps2[i].v<<" "<<temps2[i].u<<", "; // print the sorted vector
     }
+    cout<<"\nthe sorted temps vector using the algorithm library: ";
+    sort(temps.begin(),temps.end(),greater<Temperature<double>>()); // sort the vector using the algorithm library 
+    for (int i=0;i<n;i++){
+        cout<<temps[i].v<<" "<<temps[i].u<<", "; // print the sorted vector
+    }
+
+
 }

@@ -133,6 +133,15 @@ struct Temperature
         return *this;
     }
 
+    // overload the operator<
+    bool operator<(const Temperature<V> &a) const{
+        return convert_to_C1(*this).v<convert_to_C1(a).v;
+    }
+
+    // overload the operator>
+    bool operator>(const Temperature<V> &a) const{
+        return convert_to_C1(*this).v>convert_to_C1(a).v;
+    }
 };
 
 // this is the function which converts the temperature to C
@@ -269,18 +278,14 @@ Temperature<V> operator-(Temperature<V> const& a, Temperature<V> const& b){
 
 // sort
 template<typename V>
-vector<Temperature<V>> sort(vector<Temperature<V>> const& l1, bool order=true){
+vector<Temperature<V>> sort1(vector<Temperature<V>> const& l1, bool order=true){
     int n=l1.size();
-    vector <Temperature<double>> l2=l1;
-    V a;
-    V b;
-    Temperature<double> temp;
+    vector <Temperature<V>> l2=l1;
+    Temperature<V> temp;
     if (order==true){ // from low to high
         for (int i=0;i<n;i++){ // do the sorting
             for (int j=i+1;j<n;j++){
-                a=convert_to_C1(l2[i]).v;
-                b=convert_to_C1(l2[j]).v;
-                if (a>b){
+                if (l2[i]>l2[j]){
                     temp=l2[i];
                     l2[i]=l2[j];
                     l2[j]=temp;
@@ -291,9 +296,7 @@ vector<Temperature<V>> sort(vector<Temperature<V>> const& l1, bool order=true){
     else{ // from high to low
         for (int i=0;i<n;i++){
             for (int j=i+1;j<n;j++){
-                a=convert_to_C1(l2[i]).v;
-                b=convert_to_C1(l2[j]).v;
-                if (a<b){
+                if (l2[i]<l2[j]){
                     temp=l2[i];
                     l2[i]=l2[j];
                     l2[j]=temp;
@@ -303,3 +306,4 @@ vector<Temperature<V>> sort(vector<Temperature<V>> const& l1, bool order=true){
     }
     return l2;
 }
+
